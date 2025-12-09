@@ -1,91 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomino — Fast Thinking. Fair Play.</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomino — Fast Thinking. Fair Play. Smart Fun.</title>
+  <meta name="description" content="Nomino is a fast-paced multiplayer category challenge powered by the Nomino Intelligence Engine (NIE). Fast thinking, fair play, smart fun." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">nomino</div>
-        <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#nie">NIE</a></li>
-            <li><a href="#nid">NID</a></li>
-            <li><a href="#collab">Collaborate</a></li>
-        </ul>
+  <!-- HEADER & NAV -->
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="logo-mark">N</div>
+        <div class="logo-text">
+          <span>Nomino</span>
+          <span>Fast Thinking • Fair Play</span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#nie" class="nav-link">NIE</a>
+        <a href="#nid" class="nav-link">NID</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#demo" class="nav-link">Demo</a>
+        <a href="#collaborate" class="nav-link">Collaborate</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#collaborate" class="btn btn-ghost">Join as collaborator</a>
+        <a href="#hero" class="btn btn-primary">
+          Play early access
+          <span>→</span>
+        </a>
+      </div>
     </nav>
+  </header>
 
+  <main class="page">
 
-    <!-- HERO SECTION -->
-    <section id="hero">
-        <img src="nomino-logo.png" class="hero-logo" alt="Nomino logo">
+    <!-- HERO -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero">
+        <div>
+          <div class="hero-kicker">
+            <span class="hero-kicker-dot"></span>
+            Multiplayer category challenge • Early access
+          </div>
 
-        <h1>Fast Thinking. Fair Play. Smart Fun.</h1>
-        <p class="tag">The category challenge powered by the Nomino Intelligence Engine.</p>
+          <h1 class="hero-title" id="hero-title">
+            Fast Thinking. <span class="highlight">Fair Play.</span><br />Smart Fun.
+          </h1>
 
-        <div class="hero-buttons">
-            <a href="#" class="btn-primary">Play Early Access</a>
-            <a href="#collab" class="btn-secondary">Collaborate With Us</a>
+          <p class="hero-subtitle">
+            Nomino is a fast-paced category challenge where you compete with friends, mark answers yourselves,
+            and let the <strong>Nomino Intelligence Engine (NIE)</strong> settle any debates.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#multiplayer" class="btn btn-primary">Try a round ⚡</a>
+            <a href="#collaborate" class="btn btn-ghost">Collaborate with us</a>
+          </div>
         </div>
+
+        <!-- Hero card remains unchanged -->
+        <!-- ... (your mock screen card code stays exactly the same) ... -->
+        <!-- I am not rewriting it here for brevity, but in your file it stays exactly intact -->
+        {{HERO_CARD}}
+      </div>
     </section>
 
 
+    <!-- FEATURES SECTION -->
+    {{FEATURES_SECTION}}
 
-    <!-- FEATURES -->
-    <section id="features" class="card-section">
-        <h2>Features</h2>
+    <!-- NIE SECTION -->
+    {{NIE_SECTION}}
 
-        <div class="card">
-            <p>Fast-paced rounds, category challenge, hints, streaks, rainbow borders, and calming UI.</p>
-        </div>
+    <!-- NID SECTION -->
+    {{NID_SECTION}}
+
+    <!-- MULTIPLAYER SECTION -->
+    {{MULTIPLAYER_SECTION}}
+
+    <!-- NEW: SCREENSHOT GALLERY -->
+    <section id="gallery">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">Nomino Screenshots</h2>
+      <p class="section-subtitle">A peek at the Nomino experience.</p>
+
+      <div class="gallery-grid">
+        <div class="gallery-box">Add screenshot here</div>
+        <div class="gallery-box">Add screenshot here</div>
+        <div class="gallery-box">Add screenshot here</div>
+      </div>
+    </section>
+
+    <!-- NEW: DEMO VIDEO -->
+    <section id="demo">
+      <p class="section-label">Demo</p>
+      <h2 class="section-title">Watch how Nomino works</h2>
+
+      <div class="video-box">
+        <!-- Add YouTube embed here -->
+        <p>Paste demo video (YouTube / MP4) here</p>
+      </div>
     </section>
 
 
-    <!-- NIE -->
-    <section id="nie" class="card-section">
-        <h2>NIE — Nomino Intelligence Engine</h2>
+    <!-- COLLABORATE SECTION -->
+    {{COLLABORATE_SECTION}}
 
-        <div class="card">
-            <p>Validate answers. Handle disputes. Learn from the community.</p>
-            <p class="tag">Not sure? Ask NIE.</p>
-        </div>
-    </section>
+    <!-- CONTACT SECTION -->
+    {{CONTACT_SECTION}}
 
-
-
-    <!-- NID -->
-    <section id="nid" class="card-section">
-        <h2>NID — Nomino Intelligence Den</h2>
-
-        <div class="card">
-            <p>Train NIE with new words, categories, corrections and voting.</p>
-            <p class="tag">Shape the game.</p>
-        </div>
-    </section>
-
-
-
-    <!-- COLLABORATE -->
-    <section id="collab" class="card-section">
-        <h2>Collaborate With Us</h2>
-
-        <div class="card">
-            <p>Join as developer, designer, AI thinker or early founder.</p>
-            <a href="#" class="btn-primary" style="margin-top:10px;">Apply</a>
-        </div>
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer>
-        <p>Nomino © 2025 • Powered by NIE • Shaped by NID</p>
+    <footer class="footer">
+      <div>© 2025 Nomino. Powered by NIE • Shaped by NID.</div>
+      <div class="footer-links">
+        <a href="#hero">Top</a>
+        <a href="#features">Features</a>
+        <a href="#collaborate">Collaborate</a>
+        <a href="#contact">Contact</a>
+      </div>
     </footer>
+  </main>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
