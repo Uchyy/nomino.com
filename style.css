@@ -14,6 +14,11 @@
   --shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 
   --radius: 1.3rem;
+  --accent: var(--accent-purple);
+  --border: var(--card-border);
+  --radius-xl: 1.3rem;
+  --shadow-soft: var(--shadow);
+
     }
 
 * {
