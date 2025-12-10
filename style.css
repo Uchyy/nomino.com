@@ -679,6 +679,38 @@ body {
       background: #f97316;
     }
 
+
+.screenshot-box {
+  height: 220px;
+  border-radius: 1rem;
+  background: var(--bg-soft);
+  border: 1px dashed var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.video-wrapper {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: var(--bg-soft);
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 420px;
+}
+
+@media (max-width: 768px) {
+  .video-wrapper iframe {
+    height: 240px;
+  }
+}
+
     .card-subtext {
       margin-top: 0.35rem;
       color: var(--muted);
