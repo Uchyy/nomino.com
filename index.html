@@ -228,6 +228,79 @@ body {
       }
     }
 
+    /* -----------------------------
+   NAV TOGGLE (HAMBURGER)
+------------------------------ */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--muted);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+/* -----------------------------
+   MOBILE NAV BEHAVIOR
+------------------------------ */
+@media (max-width: 768px) {
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: none;                 /* HIDDEN BY DEFAULT */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    margin-top: 0.75rem;
+  }
+
+  .nav-links.active {
+    display: flex;                 /* SHOW WHEN ACTIVE */
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    padding: 0.4rem 0;
+  }
+
+  .nav-cta {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0.6rem;
+  }
+}
+
+/* -----------------------------
+   TOGGLE ANIMATION
+------------------------------ */
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
     /* Sections */
 
     section {
@@ -698,8 +771,10 @@ body {
     .footer-links a:hover {
       color: var(--text);
     }
+
     
-    /* ---------------------------------------------
+    
+/* ---------------------------------------------
    RESPONSIVE
 ---------------------------------------------- */
     @media (max-width: 900px) {
@@ -717,6 +792,12 @@ body {
 <body>
 
   <header>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <nav class="nav">
       <div class="nav-left">
         <div class="logo-mark">N</div>
@@ -1169,6 +1250,14 @@ body {
         }
       });
     });
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        toggle.classList.remove("active");
+        links.classList.remove("active");
+      });
+    });
+
   </script>
 </body>
 </html>
