@@ -8,12 +8,714 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
-</head>
 
+  <style>
+    :root {
+  --bg: #ffffff;
+  --bg-soft: #fafafa;
+  --text: #e80294;
+  --muted: #336a91;
+
+  /* Pastel accent colours */
+  --accent-purple: #b9a6ff;
+  --accent-blue: #9fd8ff;
+  --accent-peach: #ffd6b3;
+  --accent-mint: #c6f5d5;
+
+  --card-border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+
+  --radius: 1.3rem;
+    }
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Poppins", sans-serif;
+}
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .page {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.6));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      max-width: 1140px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fed7aa, #f97316 40%, #ea580c 70%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.2rem 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.3rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #f97316, #fb923c);
+      transition: width 0.16s ease-out;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.45rem 1.05rem;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at 10% 0, #fed7aa 0, #f97316 35%, #ea580c 100%);
+      color: #111827;
+      box-shadow: 0 10px 28px rgba(248, 148, 69, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(248, 148, 69, 0.85);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.6);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    /* Mobile nav toggle (simple hide links on small screens) */
+
+    .nav-links,
+    .nav-cta {
+      /* for very small screens we stack */
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-top: 0.25rem;
+        border-top: 1px solid rgba(148, 163, 184, 0.15);
+        margin-top: 0.4rem;
+      }
+
+      .nav-cta {
+        margin-left: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-cta {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Sections */
+
+    section {
+      padding: 4.5rem 0 3rem;
+    }
+
+    section:first-of-type {
+      padding-top: 3.25rem;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.95rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding-top: 3.5rem;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.16rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(248, 148, 69, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.4vw + 1.4rem, 3.1rem);
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      margin: 0 0 0.75rem;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(to right, #fed7aa, #f97316, #fb923c);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-pill {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    .hero-meta-item strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 0.07), rgba(15, 23, 42, 1));
+      border-radius: 1.5rem;
+      padding: 1.35rem 1.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-status-pill {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.7);
+    }
+
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .chip-accent {
+      border-color: rgba(248, 148, 69, 0.8);
+      background: rgba(248, 148, 69, 0.1);
+      color: #fed7aa;
+    }
+
+    .mock-screen {
+      margin-top: 0.3rem;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
+      padding: 0.9rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+    }
+
+    .mock-screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .mock-dots {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .mock-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.6);
+    }
+
+    .mock-dot:nth-child(1) { background: #f97316; }
+    .mock-dot:nth-child(2) { background: #facc15; }
+    .mock-dot:nth-child(3) { background: #22c55e; }
+
+    .mock-board {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .mock-categories {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .mock-cell {
+      border-radius: 0.8rem;
+      padding: 0.45rem 0.55rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.72rem;
+    }
+
+    .mock-cell-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-bottom: 0.18rem;
+    }
+
+    .mock-cell-value {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+
+    .mock-letter-pill {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 0.18rem 0.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .mock-timer {
+      border-radius: 0.8rem;
+      padding: 0.55rem 0.7rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-size: 0.75rem;
+    }
+
+    .mock-timer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mock-timer-value {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .mock-ask-nie {
+      margin-top: 0.45rem;
+      font-size: 0.72rem;
+      border-radius: 999px;
+      padding: 0.28rem 0.75rem;
+      border: 1px solid rgba(248, 148, 69, 0.9);
+      color: #fed7aa;
+      background: rgba(248, 148, 69, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .mock-ask-nie span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #f97316;
+      box-shadow: 0 0 8px rgba(248, 148, 69, 0.9);
+    }
+
+    .floating-tag {
+      position: absolute;
+      right: 1.4rem;
+      bottom: 1.4rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .floating-tag span.badge {
+      font-size: 0.7rem;
+      color: #facc15;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-card {
+        margin-top: 1rem;
+      }
+    }
+
+    /* Shared grid / cards */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .card {
+      border-radius: var(--radius-xl);
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.7);
+      font-size: 0.85rem;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+
+    .card-subtext {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .pill-accent {
+      border-color: rgba(248, 148, 69, 0.9);
+      color: #fed7aa;
+      background: rgba(248, 148, 69, 0.06);
+    }
+
+    .list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .list li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      gap: 0.35rem;
+      align-items: flex-start;
+    }
+
+    .list li::before {
+      content: "•";
+      color: var(--accent);
+      margin-top: 0.05rem;
+    }
+
+    /* Collaborate / footer */
+
+    .collab-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+    
+    /* ---------------------------------------------
+   RESPONSIVE
+---------------------------------------------- */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      
+       h1 { font-size: 1.9rem; }
+       
+        nav ul { display: none; }
+        .hero-logo { width: 150px; }
+        }
+  </style>
+</head>
 <body>
 
-  <!-- HEADER & NAV -->
   <header>
     <nav class="nav">
       <div class="nav-left">
@@ -23,17 +725,14 @@
           <span>Fast Thinking • Fair Play</span>
         </div>
       </div>
-
       <div class="nav-links">
         <a href="#features" class="nav-link">Features</a>
         <a href="#nie" class="nav-link">NIE</a>
         <a href="#nid" class="nav-link">NID</a>
-        <a href="#gallery" class="nav-link">Gallery</a>
-        <a href="#demo" class="nav-link">Demo</a>
+        <a href="#multiplayer" class="nav-link">Multiplayer</a>
         <a href="#collaborate" class="nav-link">Collaborate</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
-
       <div class="nav-cta">
         <a href="#collaborate" class="btn btn-ghost">Join as collaborator</a>
         <a href="#hero" class="btn btn-primary">
@@ -45,15 +744,10 @@
   </header>
 
   <main class="page">
-
     <!-- HERO -->
     <section id="hero" aria-labelledby="hero-title">
       <div class="hero">
         <div>
-          <div class="hero-kicker">
-            <span class="hero-kicker-dot"></span>
-            Multiplayer category challenge • Early access
-          </div>
 
           <h1 class="hero-title" id="hero-title">
             Fast Thinking. <span class="highlight">Fair Play.</span><br />Smart Fun.
@@ -65,61 +759,392 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#multiplayer" class="btn btn-primary">Try a round ⚡</a>
-            <a href="#collaborate" class="btn btn-ghost">Collaborate with us</a>
+            <a href="#multiplayer" class="btn btn-primary">
+              Try a round
+              <span>⚡</span>
+            </a>
+            <a href="#collaborate" class="btn btn-ghost">
+              Collaborate with us
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-pill"></span>
+              <span><strong>Built for friends</strong> • local & online play</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-pill"></span>
+              <span><strong>Powered by NIE</strong> • smart fairness assistant</span>
+            </div>
           </div>
         </div>
 
-        <!-- Hero card remains unchanged -->
-        <!-- ... (your mock screen card code stays exactly the same) ... -->
-        <!-- I am not rewriting it here for brevity, but in your file it stays exactly intact -->
-        {{HERO_CARD}}
+        <!-- Simple graphic / mock "screen" -->
+        <div class="hero-card" aria-label="Nomino mock game preview">
+          <div class="hero-card-header">
+            <div class="hero-card-title">
+              Nomino • Live Round
+            </div>
+            <div class="hero-status-pill">Friends Lobby</div>
+          </div>
+
+          <div class="hero-chip-row">
+            <div class="chip chip-accent">Letter: S</div>
+            <div class="chip">60s round</div>
+            <div class="chip">3 players</div>
+          </div>
+
+          <div class="mock-screen">
+            <div class="mock-screen-header">
+              <span>Round 3 • Mark answers</span>
+              <div class="mock-dots">
+                <span class="mock-dot"></span>
+                <span class="mock-dot"></span>
+                <span class="mock-dot"></span>
+              </div>
+            </div>
+
+            <div class="mock-board">
+              <div class="mock-categories">
+                <div class="mock-cell">
+                  <div class="mock-cell-label">Animal</div>
+                  <div class="mock-cell-value">
+                    <span>Snake</span>
+                    <span class="mock-letter-pill">✓</span>
+                  </div>
+                </div>
+                <div class="mock-cell">
+                  <div class="mock-cell-label">Country</div>
+                  <div class="mock-cell-value">
+                    <span>Spain</span>
+                    <span class="mock-letter-pill">✓</span>
+                  </div>
+                </div>
+                <div class="mock-cell">
+                  <div class="mock-cell-label">Food</div>
+                  <div class="mock-cell-value">
+                    <span>Spaghetti</span>
+                    <span class="mock-letter-pill">✓</span>
+                  </div>
+                </div>
+                <div class="mock-cell">
+                  <div class="mock-cell-label">Emotion</div>
+                  <div class="mock-cell-value">
+                    <span>Sharp</span>
+                    <span class="mock-letter-pill">?</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="mock-timer">
+                  <div class="mock-timer-row">
+                    <span>Time left</span>
+                    <span class="mock-timer-value">00:12</span>
+                  </div>
+                  <div class="mock-timer-row">
+                    <span>Score</span>
+                    <span>+32 pts</span>
+                  </div>
+                </div>
+                <button class="mock-ask-nie" type="button">
+                  <span class="dot"></span>
+                  Ask NIE about “Sharp”
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-tag">
+            <span class="badge">NIE</span>
+            <span>Not sure if it counts? Ask the engine.</span>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- FEATURES -->
+    <section id="features" aria-labelledby="features-title">
+      <p class="section-label">Features</p>
+      <h2 class="section-title" id="features-title">Everything you need for quick, creative play.</h2>
+      <p class="section-subtitle">
+        Nomino is simple enough to pick up in seconds, but deep enough to keep your group coming back. Fast rounds,
+        flexible categories, and smart support from NIE.
+      </p>
 
-    <!-- FEATURES SECTION -->
-    {{FEATURES_SECTION}}
+      <div class="feature-list">
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Core game loop
+          </div>
+          <h3 class="card-title">Pick a letter. Fill the categories.</h3>
+          <p class="card-subtext">
+            Nomino gives you a starting letter. You and your friends race the timer to fill each category with the most
+            creative answers.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Animals</span>
+            <span class="pill">Countries</span>
+            <span class="pill">Food</span>
+            <span class="pill">Movies</span>
+            <span class="pill">Emotions</span>
+          </div>
+        </div>
 
-    <!-- NIE SECTION -->
-    {{NIE_SECTION}}
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Multiplayer flow
+          </div>
+          <h3 class="card-title">Players mark each other.</h3>
+          <p class="card-subtext">
+            After each round, you review and mark answers as a group. Decide what counts, what doesn’t, and who found
+            the most original ideas.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Group marking</span>
+            <span class="pill">Unique answers bonus</span>
+            <span class="pill">Instant results</span>
+          </div>
+        </div>
 
-    <!-- NID SECTION -->
-    {{NID_SECTION}}
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Smart support
+          </div>
+          <h3 class="card-title">Not sure? Ask NIE.</h3>
+          <p class="card-subtext">
+            If a word is disputed or unclear, you can send it to the Nomino Intelligence Engine for guidance and
+            consistency across games.
+          </p>
+          <div class="pill-row">
+            <span class="pill pill-accent">Dispute answers</span>
+            <span class="pill">Edge-case clarity</span>
+            <span class="pill">Fair play</span>
+          </div>
+        </div>
 
-    <!-- MULTIPLAYER SECTION -->
-    {{MULTIPLAYER_SECTION}}
-
-    <!-- NEW: SCREENSHOT GALLERY -->
-    <section id="gallery">
-      <p class="section-label">Gallery</p>
-      <h2 class="section-title">Nomino Screenshots</h2>
-      <p class="section-subtitle">A peek at the Nomino experience.</p>
-
-      <div class="gallery-grid">
-        <div class="gallery-box">Add screenshot here</div>
-        <div class="gallery-box">Add screenshot here</div>
-        <div class="gallery-box">Add screenshot here</div>
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Sessions
+          </div>
+          <h3 class="card-title">Short rounds. Big laughs.</h3>
+          <p class="card-subtext">
+            Nomino is built for short bursts: 60–90 second rounds that fit between calls, after dinner, or on game night.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Custom timers</span>
+            <span class="pill">Quick rematch</span>
+            <span class="pill">Daily streaks (soon)</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- NEW: DEMO VIDEO -->
-    <section id="demo">
-      <p class="section-label">Demo</p>
-      <h2 class="section-title">Watch how Nomino works</h2>
+    <!-- NIE -->
+    <section id="nie" aria-labelledby="nie-title">
+      <div class="grid-2">
+        <div>
+          <p class="section-label">NIE</p>
+          <h2 class="section-title" id="nie-title">Nomino Intelligence Engine.</h2>
+          <p class="section-subtitle">
+            NIE is the smart assistant that sits behind every round of Nomino. It doesn’t take over the game — it backs
+            you up when things get fuzzy.
+          </p>
 
-      <div class="video-box">
-        <!-- Add YouTube embed here -->
-        <p>Paste demo video (YouTube / MP4) here</p>
+          <ul class="list">
+            <li><span>Validate answers when you’re unsure whether they fit a category.</span></li>
+            <li><span>Handle disputes after players have marked themselves.</span></li>
+            <li><span>Explain categories and give context for tricky edge cases.</span></li>
+            <li><span>Learn from player feedback to get better over time.</span></li>
+          </ul>
+
+          <div class="pill-row" style="margin-top: 0.75rem;">
+            <span class="pill pill-accent">“Ask NIE” button</span>
+            <span class="pill">Dispute review</span>
+            <span class="pill">Fairness engine</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Example dispute flow
+          </div>
+          <h3 class="card-title">“Does this really count?”</h3>
+          <p class="card-subtext">
+            Imagine your group isn’t sure whether “Sharp” counts as an emotion.
+            Rather than argue, you send it to NIE:
+          </p>
+          <ul class="list">
+            <li><span>Players mark the answer as disputed.</span></li>
+            <li><span>NIE reviews the word + category pairing.</span></li>
+            <li><span>NIE responds with a suggested ruling and reasoning.</span></li>
+            <li><span>The group can accept or override the suggestion.</span></li>
+          </ul>
+          <p class="card-subtext" style="margin-top: 0.5rem;">
+            You stay in control. NIE just keeps the game moving and consistent.
+          </p>
+        </div>
       </div>
     </section>
 
+    <!-- NID -->
+    <section id="nid" aria-labelledby="nid-title">
+      <div class="grid-2">
+        <div>
+          <p class="section-label">NID</p>
+          <h2 class="section-title" id="nid-title">Nomino Intelligence Den.</h2>
+          <p class="section-subtitle">
+            The Den is where NIE grows. It’s our internal “brain” of validators and where players help train the system
+            by sharing suggestions and corrections.
+          </p>
 
-    <!-- COLLABORATE SECTION -->
-    {{COLLABORATE_SECTION}}
+          <ul class="list">
+            <li><span>Suggest new categories and subcategories.</span></li>
+            <li><span>Submit words that should be recognised in certain categories.</span></li>
+            <li><span>Flag rulings that feel off or incomplete.</span></li>
+            <li><span>Help shape how Nomino understands the world.</span></li>
+          </ul>
 
-    <!-- CONTACT SECTION -->
-    {{CONTACT_SECTION}}
+          <div class="pill-row" style="margin-top: 0.75rem;">
+            <span class="pill pill-accent">NIE Trainer badge</span>
+            <span class="pill">Category curator</span>
+            <span class="pill">Community-driven engine</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Behind the scenes
+          </div>
+          <h3 class="card-title">A living validator repo.</h3>
+          <p class="card-subtext">
+            Internally, the Den is our evolving repository of rules and validators for each category. Externally, it’s a
+            place for players to leave feedback and help teach NIE new patterns.
+          </p>
+          <p class="card-subtext">
+            Over time, the Den becomes a shared reference of what should count in Nomino — shaped by the community.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MULTIPLAYER -->
+    <section id="multiplayer" aria-labelledby="multiplayer-title">
+      <p class="section-label">Multiplayer</p>
+      <h2 class="section-title" id="multiplayer-title">Challenge friends. Debate answers. Let NIE decide.</h2>
+      <p class="section-subtitle">
+        Nomino is built for small groups, game nights, and remote hangs. You mark yourselves, argue a little, and hand
+        the tough calls to NIE when you need backup.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Flow
+          </div>
+          <h3 class="card-title">A typical round.</h3>
+          <ol class="list" style="margin-top: 0.25rem;">
+            <li><span>Nomino gives you a letter and categories.</span></li>
+            <li><span>Everyone fills out answers against the timer.</span></li>
+            <li><span>Players reveal answers and mark each other.</span></li>
+            <li><span>Any questions or disputes get sent to NIE.</span></li>
+            <li><span>Scores update, and you jump into the next round.</span></li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Coming soon
+          </div>
+          <h3 class="card-title">Online rooms & more.</h3>
+          <p class="card-subtext">
+            We’re working towards room codes, remote lobbies, and shared marking screens, all backed by NIE for
+            consistent judgments between games and groups.
+          </p>
+          <div class="pill-row" style="margin-top: 0.7rem;">
+            <span class="pill">Room codes</span>
+            <span class="pill">Friends list</span>
+            <span class="pill">Shared marking</span>
+            <span class="pill pill-accent">NIE-backed fairness</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLABORATE -->
+    <section id="collaborate" aria-labelledby="collaborate-title">
+      <p class="section-label">Collaborate</p>
+      <h2 class="section-title" id="collaborate-title">Help build the future of Nomino.</h2>
+      <p class="section-subtitle">
+        Nomino is early, and we’re looking for people who want to help shape it — from game design and UI, to the
+        Nomino Intelligence Engine and Den.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="card-title">We’d love to hear from:</h3>
+          <ul class="list">
+            <li><span>Developers who enjoy games, Flutter, or web.</span></li>
+            <li><span>Designers who care about calm, playful interfaces.</span></li>
+            <li><span>AI / ML enthusiasts interested in playful intelligence.</span></li>
+            <li><span>Content & category creators who love words and concepts.</span></li>
+            <li><span>Potential co-founders who resonate with this space.</span></li>
+          </ul>
+
+          <div class="collab-actions">
+            <a href="mailto:hello@nomino.app?subject=Collaborating%20on%20Nomino" class="btn btn-primary">
+              Email us to collaborate
+            </a>
+            <a href="#contact" class="btn btn-ghost">View contact details</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">
+            <span class="card-tag-dot"></span>
+            Early circle
+          </div>
+          <h3 class="card-title">Why join now?</h3>
+          <p class="card-subtext">
+            We’re defining the shape of Nomino as a product and a world: the engine, the Den, the multiplayer experience,
+            and the visual language.
+          </p>
+          <p class="card-subtext">
+            Joining early means helping set the tone — and, for the right people, exploring long-term roles or
+            co-founder paths as the project matures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <section id="contact" aria-labelledby="contact-title">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title" id="contact-title">Say hi.</h2>
+      <p class="section-subtitle">
+        Want to test Nomino, collaborate, or just share feedback on NIE / NID ideas? Drop a message — we’d love to hear
+        from you.
+      </p>
+      <div class="card">
+        <p class="card-subtext">
+          ✉️ <strong>Email</strong><br />
+          <a href="mailto:hello@nomino.app">hello@nomino.app</a>
+        </p>
+        <p class="card-subtext" style="margin-top: 0.75rem;">
+          🔗 <strong>Links (optional placeholders)</strong><br />
+          GitHub, X/Twitter, or a dev blog can be linked here when you’re ready.
+        </p>
+      </div>
+    </section>
 
     <footer class="footer">
       <div>© 2025 Nomino. Powered by NIE • Shaped by NID.</div>
@@ -132,6 +1157,18 @@
     </footer>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    // basic smooth scroll for older browsers
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
