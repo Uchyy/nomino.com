@@ -1,9 +1,16 @@
-  :root {
+  
+    :root {
   --bg: #ffffff;
   --bg-soft: #fafafa;
   --text: #e80294;
   --muted: #ffffff;
 
+  /* ✅ NEW: semantic text colors */
+  --text-on-light: #1F2937;   /* dark grey */
+  --text-on-dark: #E5E7EB;    /* soft white */
+  --muted-on-light: #6B7280;
+  --muted-on-dark: #9CA3AF;
+  
   /* Pastel accent colours */
   --accent-purple: #b9a6ff;
   --accent-blue: #9fd8ff;
@@ -31,6 +38,12 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Poppins", sans-serif;
+}
+
+.card,
+.hero-card,
+.mock-screen {
+  color: var(--text-on-dark);
 }
 
     a {
@@ -322,7 +335,7 @@ body {
 
     .section-subtitle {
       font-size: 0.95rem;
-      color: var(--muted);
+      color: var(--text-on-light);
       max-width: 560px;
       line-height: 1.6;
       margin-bottom: 1.75rem;
@@ -403,7 +416,7 @@ body {
 
     .hero-subtitle {
       font-size: 0.98rem;
-      color: var(--muted);
+      color: var(--text-on-light);
       max-width: 520px;
       line-height: 1.7;
       margin-bottom: 1.75rem;
@@ -440,6 +453,10 @@ body {
     .hero-meta-item strong {
       color: var(--text);
       font-weight: 500;
+    }
+    
+    .hero-meta-item span {
+        color: var(--text-on-light);
     }
 
     .hero-card {
@@ -731,6 +748,11 @@ body {
       background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(148, 163, 184, 0.4);
       color: #336a91;
+    }
+    
+    .card .card-list {
+        color: #ffffff
+
     }
 
     .pill-accent {
